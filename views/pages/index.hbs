@@ -1,0 +1,111 @@
+{{#if success}}
+{{> successToast}}
+{{/if}}
+<div class="row child-height">
+    <div class="col-sm-12 m-auto">
+        <div class="card w-50 m-auto shadow">
+            <h5 class="card-header">Add User</h5>
+            <form id="newUserForm" class="card-body needs-validation" action="newUser" method="POST"
+                enctype="application/x-www-form-urlencoded" novalidate>
+                <div class="form-group">
+
+                    <label for="InputEmail1">Email address</label>
+                    {{#unless submitted}}
+                    <input name="email" type="email" value="{{email}}" class="form-control" id="InputEmail1"
+                        placeholder="Enter email" required>
+                    {{else}}
+                    <input name="email" type="email" value="{{email}}"
+                        class="form-control {{#ifCond emailRequiredError '||' emailMatchError}}is-invalid{{else}}is-valid{{/ifCond}}"
+                        id="InputEmail1" placeholder="Enter email" required>
+                    {{#if emailRequiredError}}
+                    <div class="invalid-feedback">
+                        {{emailRequiredError}}
+                    </div>
+                    {{else if emailMatchError}}
+                    <div class="invalid-feedback">
+                        {{emailMatchError}}
+                    </div>
+                    {{else}}
+                    <div class="valid-feedback">
+                        Looks Good
+                    </div>
+                    {{/if}}
+                    {{/unless}}
+                    <div class="form-group">
+                        <label for="InputPassword">Password</label>
+                        {{#unless submitted}}
+                        <input name="password" type="password" value="{{password}}" class="form-control"
+                            id="InputPassword" placeholder="Password" required>
+                        {{else}}
+                        <input name="password" type="password" value="{{password}}"
+                            class="form-control {{#if pwRequiredError}}is-invalid{{else}}is-valid{{/if}}"
+                            id="InputPassword" placeholder="Password" required>
+                        {{#if pwRequiredError}}
+                        <div class="invalid-feedback">
+                            {{pwRequiredError}}
+                        </div>
+                        {{else}}
+                        <div class="valid-feedback">
+                            Looks Good
+                        </div>
+                        {{/if}}
+                        {{/unless}}
+                    </div>
+                    <div class="form-group">
+                        <label for="InputPasswordAgain">Re-enter Password</label>
+                        {{#unless submitted}}
+                        <input name="rePassword" type="password" value="{{rePassword}}" class="form-control"
+                            id="InputPasswordAgain" placeholder="Re-enter Password" required>
+                        {{else}}
+                        <input name="rePassword" type="password" value="{{rePassword}}"
+                            class="form-control {{#if pwInputError}}is-invalid{{else}}is-valid{{/if}}"
+                            id="InputPasswordAgain" placeholder="Re-enter Password" required>
+                        {{#if pwInputError}}
+                        <div class="invalid-feedback">
+                            {{pwInputError}}
+                        </div>
+                        {{else}}
+                        <div class="valid-feedback">
+                            Looks Good
+                        </div>
+                        {{/if}}
+                        {{/unless}}
+                    </div>
+                    <div class="form-group">
+                        <label for="InputUsername">Username</label>
+                        {{#unless submitted}}
+                        <input name="name" type="text" value="{{name}}" class="form-control" id="InputUsername"
+                            placeholder="Username" required>
+                        {{else}}
+                        <input name="name" type="text" value="{{name}}"
+                            class="form-control {{#if usernameRequiredError}}is-invalid{{else}}is-valid{{/if}}"
+                            id="InputUsername" placeholder="Username" required>
+                        {{#if usernameRequiredError}}
+                        <div class="invalid-feedback">
+                            {{usernameRequiredError}}
+                        </div>
+                        {{else}}
+                        <div class="valid-feedback">
+                            Looks Good
+                        </div>
+                        {{/if}}
+                        {{/unless}}
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <label for="InputUsername">Paths</label>
+                            <input name="newPath" type="text" value="{{newPath}}" class="form-control" id="inputPath"
+                                placeholder="Path">
+                        </div>
+                        <div class="col-6 m-auto d-flex justify-content-center">
+                            <button id="newPathButton" class="btn btn-secondary" type="button">Add
+                                Path</button>
+                        </div>
+
+                    </div>
+                    {{> paths}}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+  color: #00b7ff;
+}
+.child-height {
+  height: inherit;
+}
+.icon-background {
+  color: transparent;
+}
+.fa-stack:hover {
+  .icon-background {
+    color: #cccccc;
+  }
+}

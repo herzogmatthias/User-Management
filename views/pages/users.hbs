@@ -1,0 +1,21 @@
+<div>
+    {{#each users}}
+    <div id="{{id}}" class="jumbotron m-5 shadow">
+        <h1 class="display-4">{{name}}</h1>
+        <p class="lead">{{email}}</p>
+        <hr class="my-4">
+        <div class="list-group list-group-flusch">
+            {{#each Directories}}
+            <li class="list-group-item"><b>{{path}}</b></li>
+            {{/each}}
+        </div>
+
+        <p class="lead mt-2">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Edit</a>
+            <a id="DeleteButton{{id}}" data-toggle="modal" data-user="{{name}}" data-target="#ConfirmationModal" class="btn btn-danger btn-lg"
+                href="#" role="button">Delete</a>
+        </p>
+    </div>
+    {{/each}}
+</div>
+{{> confirmationModal}}

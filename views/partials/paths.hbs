@@ -1,0 +1,18 @@
+<div id="partial">
+    <ul class="list-group list-group-flush m-3">
+
+
+        {{#each paths}}
+        <li id="{{id}}" class="list-group-item">
+            <div class="d-flex justify-content-between">
+                <div class="my-auto"><b>{{path}}</b></div>
+
+                <span id="{{id}}" onclick="deletePath(this)" class="fa-stack">
+                    <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                    <i class="fa fa-trash fa-stack-1x"></i>
+                </span>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+</div>
