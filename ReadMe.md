@@ -4,11 +4,11 @@
 
 This is an User-Management System where you can create User with one or more Directories where they have access to.
 It's main purpose is to show M:N Relations with the Sequelize OR-Mapper.
-Or if you just want to know how to use Handlebars as Templating Engine with Express to serve static HTML Files.
+Or if you just want to know how to use Handlebars as Templating Engine with Express to serve static HTML Files and JQuery.
 
 - A user can be added.
 - All users are displayed in a List.
-- A user can be deleted. (WIP)
+- A user can be deleted and his dependencies too.
 - A user can be edited. (WIP)
 
 ## Prerequisites

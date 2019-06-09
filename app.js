@@ -14,6 +14,7 @@ var usersRouter = require("./routes/users");
 var newUserRouter = require("./routes/newUser");
 var newPathRouter = require("./routes/newPath");
 var deletePathRouter = require("./routes/deletePath");
+var deleteUserRouter = require("./routes/deleteUser");
 
 var app = express();
 
@@ -71,6 +72,7 @@ app.use("/users", usersRouter);
 app.use("/newUser", newUserRouter);
 app.use("/newPath", newPathRouter);
 app.use("/deletePath/:id", deletePathRouter);
+app.use("/deleteUser/:id", deleteUserRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

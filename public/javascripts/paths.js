@@ -1,9 +1,7 @@
 function deletePath(e) {
   const url = window.location.origin + "/deletePath/" + e.id;
   $.get(url).then(data => {
-    const tmp = $(data);
-    const newContent = tmp.find("#partial");
-    $("#partial").replaceWith(newContent);
+    $("#partial").replaceWith($(data).find("#partial"));
   });
 }
 $(document).ready(function() {
@@ -16,10 +14,7 @@ $(document).ready(function() {
     http.send(JSON.stringify({ newPath: $("#inputPath").val() }));
     http.onreadystatechange = e => {
       if (http.readyState == 4 && http.status == 200) {
-        console.log(e);
-        const tmp = $(e.srcElement.response);
-        const newContent = tmp.find("#partial");
-        $("#partial").replaceWith(newContent);
+        $("#partial").replaceWith($(e.srcElement.response).find("#partial"));
       }
     };
   });

@@ -51,5 +51,23 @@ module.exports = {
         res(nodeData);
       });
     });
+  },
+  deleteUser: userId => {
+    return new Promise(async (res, rej) => {
+      User.destroy({
+        where: {
+          id: userId
+        }
+      });
+      UserDirectory.destroy({
+        where: {
+          user_id: userId
+        }
+      })
+        .then(() => {
+          res(true);
+        })
+        .catch(err => rej(err));
+    });
   }
 };
