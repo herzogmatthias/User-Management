@@ -4,8 +4,14 @@
 <div class="row child-height">
     <div class="col-sm-12 m-auto">
         <div class="card w-50 m-auto shadow">
+            {{#if isEdit}}
+            <h5 class="card-header">Edit User</h5>
+            <input type="hidden" value="{{id}}">
+            {{else}}
             <h5 class="card-header">Add User</h5>
-            <form id="newUserForm" class="card-body needs-validation" action="newUser" method="POST"
+            {{/if}}
+            <form id="newUserForm" class="card-body needs-validation"
+                action="{{#if isEdit}}/editUser/error{{else}}newUser{{/if}}" method="POST"
                 enctype="application/x-www-form-urlencoded" novalidate>
                 <div class="form-group">
 

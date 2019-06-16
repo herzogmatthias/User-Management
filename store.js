@@ -1,4 +1,5 @@
-'use strict';
+"use strict";
 module.exports = {
-  paths: []
+  paths: [],
+  userToEditId: null
 };

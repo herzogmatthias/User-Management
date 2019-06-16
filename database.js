@@ -69,5 +69,25 @@ module.exports = {
         })
         .catch(err => rej(err));
     });
+  },
+  findUser: userId => {
+    console.log(userId);
+    return new Promise((res, rej) => {
+      User.findOne({
+        where: {
+          id: userId
+        },
+        include: [
+          {
+            model: Directory,
+            nested: true,
+            attributes: ["id", "path"],
+            through: { attributes: [] }
+          }
+        ]
+      }).then(user => {
+        res(user.get({ plain: true }));
+      });
+    });
   }
 };

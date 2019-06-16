@@ -12,7 +12,6 @@ router.post("/", formValidator.validate, async function(req, res, next) {
     res.render("pages/index", {
       email: req.body.email,
       success: false,
-      isEdit: false,
       name: req.body.name,
       password: req.body.password,
       rePassword: req.body.rePassword,
@@ -39,15 +38,8 @@ router.post("/", formValidator.validate, async function(req, res, next) {
           : false
     });
   } else {
-    const user = {
-      email: req.body.email,
-      name: req.body.name,
-      password: await argon2.hash(req.body.password)
-    };
-    const directories = store.paths;
-    const success = await database.addUser(user, directories);
     store.paths = [];
-    res.redirect("/?success=true");
+    res.redirect("/users");
   }
 });
 

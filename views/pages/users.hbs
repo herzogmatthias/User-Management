@@ -11,11 +11,13 @@
         </div>
 
         <p class="lead mt-2">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Edit</a>
-            <a id="DeleteButton{{id}}" data-toggle="modal" data-id="{{id}}" data-user="{{name}}"
-                data-target="#ConfirmationModal" class="btn btn-danger btn-lg" href="#" role="button">Delete</a>
+            <a role="button" href="/editUser/init/{{id}}" class="btn btn-primary btn-lg" id="EditButton{{id}}">Edit</a>
+            <button type="button" id="DeleteButton{{id}}" data-toggle="modal" data-id="{{id}}" data-user="{{name}}"
+                data-target="#ConfirmationModal" class="btn btn-danger btn-lg">Delete</button>
         </p>
     </div>
     {{/each}}
+
+
 </div>
 {{> confirmationModal}}

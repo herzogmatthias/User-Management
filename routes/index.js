@@ -5,10 +5,12 @@ var store = require("../store");
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
+  store.paths = [];
   res.render("pages/index", {
     submitted: false,
     paths: store.paths,
-    success: req.query.success
+    success: req.query.success,
+    isEdit: false
   });
 });
 
