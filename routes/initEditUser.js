@@ -2,12 +2,13 @@
 var express = require("express");
 var router = express.Router({ mergeParams: true });
 var store = require("../store");
-var db = require("../database");
+var userRepository = require("../repositories/userRepository");
 
 /* GET home page. */
 router.get("/", async function(req, res, next) {
   store.userToEditId = req.params.id;
-  const userToEdit = await db.findUser(store.userToEditId);
+  var userToEdit = await userRepository.findUser(store.userToEditId);
+  userToEdit = userToEdit.get({ plain: true });
   store.paths = userToEdit.Directories;
   res.render("pages/index", {
     submitted: false,

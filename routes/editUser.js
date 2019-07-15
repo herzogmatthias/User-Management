@@ -4,13 +4,14 @@ var router = express.Router();
 var argon2 = require("argon2");
 var store = require("../store");
 var formValidator = require("../middleware/formValidator");
-var database = require("../database");
+var userRepository = require("../repositories/userRepository");
 
 /* GET users listing. */
 router.post("/", formValidator.validate, async function(req, res, next) {
   if (res.locals.hasErrors) {
     res.render("pages/index", {
       email: req.body.email,
+      id: req.body.id,
       success: false,
       name: req.body.name,
       password: req.body.password,
@@ -18,6 +19,7 @@ router.post("/", formValidator.validate, async function(req, res, next) {
       newPath: req.body.newPath,
       paths: store.paths,
       submitted: true,
+      isEdit: true,
       pwInputError:
         res.locals.pwInputError != undefined ? res.locals.pwInputError : false,
       usernameRequiredError:
@@ -38,6 +40,17 @@ router.post("/", formValidator.validate, async function(req, res, next) {
           : false
     });
   } else {
+    const user = {
+      id: req.body.id,
+      email: req.body.email,
+      name: req.body.name,
+      password:
+        req.body.password.includes("p=") &&
+        req.body.password.includes("$argon2i$")
+          ? req.body.password
+          : argon2.hash(req.body.password)
+    };
+    const success = await userRepository.editUser(user, store.paths);
     store.paths = [];
     res.redirect("/users");
   }

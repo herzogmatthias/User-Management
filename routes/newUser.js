@@ -4,7 +4,7 @@ var router = express.Router();
 var argon2 = require("argon2");
 var store = require("../store");
 var formValidator = require("../middleware/formValidator");
-var database = require("../database");
+var userRepository = require("../repositories/userRepository");
 
 /* GET users listing. */
 router.post("/", formValidator.validate, async function(req, res, next) {
@@ -45,7 +45,7 @@ router.post("/", formValidator.validate, async function(req, res, next) {
       password: await argon2.hash(req.body.password)
     };
     const directories = store.paths;
-    const success = await database.addUser(user, directories);
+    const success = await userRepository.addUser(user, directories);
     store.paths = [];
     res.redirect("/?success=true");
   }

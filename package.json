@@ -25,6 +25,6 @@
     "node-sass-middleware": "^0.11.0",
     "popper.js": "^1.15.0",
     "randomstring": "^1.1.5",
-    "sequelize": "^5.8.6"
+    "sequelize": "^6.0.0"
   }
 }

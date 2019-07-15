@@ -6,15 +6,18 @@
         <div class="card w-50 m-auto shadow">
             {{#if isEdit}}
             <h5 class="card-header">Edit User</h5>
-            <input type="hidden" value="{{id}}">
+
             {{else}}
             <h5 class="card-header">Add User</h5>
             {{/if}}
             <form id="newUserForm" class="card-body needs-validation"
                 action="{{#if isEdit}}/editUser/error{{else}}newUser{{/if}}" method="POST"
                 enctype="application/x-www-form-urlencoded" novalidate>
-                <div class="form-group">
 
+                <div class="form-group">
+                    {{#if isEdit}}
+                    <input name="id" type="hidden" value="{{id}}">
+                    {{/if}}
                     <label for="InputEmail1">Email address</label>
                     {{#unless submitted}}
                     <input name="email" type="email" value="{{email}}" class="form-control" id="InputEmail1"

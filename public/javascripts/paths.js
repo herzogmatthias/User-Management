@@ -18,8 +18,4 @@ $(document).ready(function() {
       }
     };
   });
-  $(".fa-stack").click(e => {
-    console.log(e);
-    console.log("I was clicked");
-  });
 });
