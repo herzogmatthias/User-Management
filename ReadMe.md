@@ -2,6 +2,16 @@
 
 ## Introduction
 
+This Project is part of the File Browser Project which currently consists of following Projects
+
+- https://github.com/MatthiasHerzog2000/download-file-microservice
+- https://github.com/MatthiasHerzog2000/generate-image-preview-microservice
+- https://github.com/MatthiasHerzog2000/file-browser-client
+- https://github.com/MatthiasHerzog2000/file-browser-server
+- https://github.com/MatthiasHerzog2000/User-Management
+
+The aim of this Projects is to recreate a Google Drive like experience for your own Files e.g. you want to access data of your private NAS from outside with a better UI. This Program will be working as a local User-Management-System where you can add, edit and remove user who can access the file system.
+
 This is an User-Management System where you can create User with one or more Directories where they have access to.
 It's main purpose is to show M:N Relations with the Sequelize OR-Mapper.
 Or if you just want to know how to use Handlebars as Templating Engine with Express to serve static HTML Files and JQuery.
