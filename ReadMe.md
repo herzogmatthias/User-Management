@@ -14,6 +14,14 @@ Or if you just want to know how to use Handlebars as Templating Engine with Expr
 
 ## Prerequisites
 
+### Node-gyp
+
+`npm install -g node-gyp`
+
+### Python 2.7
+
+https://linuxconfig.org/install-python-2-on-ubuntu-18-04-bionic-beaver-linux
+
 ### MySQL Database
 
 You need an existing MySQL Database.
