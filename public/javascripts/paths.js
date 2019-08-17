@@ -1,4 +1,5 @@
 function deletePath(e) {
+  console.log(e);
   const url = window.location.origin + "/deletePath/" + e.id;
   $.get(url).then(data => {
     $("#partial").replaceWith($(data).find("#partial"));

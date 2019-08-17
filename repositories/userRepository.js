@@ -90,12 +90,12 @@ module.exports = {
           name: usr.name
         });
         tempDirs.forEach(dir => {
+          console.log(dir.id);
           userDirectoryRepository.addUserDirectory(
             user.get({ plain: true }).id,
             dir.id
           );
         });
-        directoryRepository.removeUnused();
         res(true);
       });
     });

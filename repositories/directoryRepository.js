@@ -17,6 +17,7 @@ module.exports = {
   removeUnused: () => {
     Directory.findAll().then(directories => {
       const data = directories.map(directory => directory.get({ plain: true }));
+      console.log(data);
       data.forEach(async directory => {
         const success = await userDirectoryRepository.find(directory.id);
         if (!success) module.exports.deleteDirectory(directory.id);

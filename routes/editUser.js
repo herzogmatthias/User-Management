@@ -50,6 +50,7 @@ router.post("/", formValidator.validate, async function(req, res, next) {
           ? req.body.password
           : argon2.hash(req.body.password)
     };
+    console.log(store.paths);
     const success = await userRepository.editUser(user, store.paths);
     store.paths = [];
     res.redirect("/users");
