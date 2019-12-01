@@ -1,10 +1,12 @@
 var db = require("../models/index");
 var UserDirectory = db.sequelize.import("../models/userdirectory");
 module.exports = {
-  addUserDirectory: (user_id, directory_id) => {
+  addUserDirectory: (user_id, directory_id, read, write) => {
     UserDirectory.create({
       user_id: user_id,
-      directory_id: directory_id
+      directory_id: directory_id,
+      read: read,
+      write: write,
     });
   },
   deleteUserDirectory: user_id => {

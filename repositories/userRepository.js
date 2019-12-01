@@ -1,6 +1,7 @@
 var db = require("../models/index");
 var User = db.sequelize.import("../models/user.js");
 var Directory = db.sequelize.import("../models/directory.js");
+var UserDirectory = db.sequelize.import("../models/userdirectory.js")
 var directoryRepository = require("./directoryRepository");
 var userDirectoryRepository = require("./userDirectoryRepository");
 
@@ -18,7 +19,9 @@ module.exports = {
           tempDirs.forEach(dir => {
             userDirectoryRepository.addUserDirectory(
               user.get({ plain: true }).id,
-              dir.id
+              dir.id,
+              directories.find(d => d.name === dir.path).read,
+              directories.find(d => d.name === dir.path).write
             );
           });
           res(true);
@@ -66,7 +69,7 @@ module.exports = {
             model: Directory,
             nested: true,
             attributes: ["id", "path"],
-            through: { attributes: [] }
+            through: { attributes: ['read', 'write'] }
           }
         ]
       }).then(user => {
@@ -93,7 +96,9 @@ module.exports = {
           console.log(dir.id);
           userDirectoryRepository.addUserDirectory(
             user.get({ plain: true }).id,
-            dir.id
+            dir.id,
+            directories.find(d => d.name === dir.path).read,
+            directories.find(d => d.name === dir.path).write
           );
         });
         res(true);

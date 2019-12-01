@@ -9,7 +9,9 @@ router.get("/", async function(req, res, next) {
   store.userToEditId = req.params.id;
   var userToEdit = await userRepository.findUser(store.userToEditId);
   userToEdit = userToEdit.get({ plain: true });
-  store.paths = userToEdit.Directories;
+  userToEdit.Directories.forEach((dir) => {
+    store.paths.push({id: dir.id, name: dir.path, read: dir.UserDirectory.read, write: dir.UserDirectory.write})
+  })
   res.render("pages/index", {
     submitted: false,
     paths: store.paths,

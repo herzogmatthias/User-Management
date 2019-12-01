@@ -8,6 +8,7 @@ var userRepository = require("../repositories/userRepository");
 
 /* GET users listing. */
 router.post("/", formValidator.validate, async function(req, res, next) {
+  console.log(store.paths)
   if (res.locals.hasErrors) {
     res.render("pages/index", {
       email: req.body.email,

@@ -21,6 +21,7 @@ Or if you just want to know how to use Handlebars as Templating Engine with Expr
 - A user can be deleted and his dependencies too.
 - A user can be edited.
 - Directories will be deleted if they have no dependencies.
+- Every User has individually managed write and/or read rights for every Directory he has access to.
 
 ## Prerequisites
 

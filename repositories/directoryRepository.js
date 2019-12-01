@@ -7,8 +7,8 @@ module.exports = {
     directories.forEach(dir => {
       allDirs.push(
         Directory.findOrCreate({
-          where: { path: dir.path },
-          defaults: { path: dir.path }
+          where: { path: dir.name },
+          defaults: { path: dir.name }
         })
       );
     });

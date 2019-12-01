@@ -7,8 +7,8 @@ var randomstring = require("randomstring");
 /* GET users listing. */
 router.post("/", function(req, res, next) {
   const paths = store.paths;
-  paths.push({ path: req.body.newPath, id: randomstring.generate() });
-  res.render("partials/paths", { newPath: req.body.newPath, paths: paths });
+  paths.push({ name: req.body.name, read: req.body.read, write: req.body.write, id: randomstring.generate() });
+  res.render("partials/paths", { newPath: req.body, paths: paths });
 });
 
 module.exports = router;
