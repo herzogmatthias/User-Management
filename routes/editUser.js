@@ -7,7 +7,8 @@ var formValidator = require("../middleware/formValidator");
 var userRepository = require("../repositories/userRepository");
 
 /* GET users listing. */
-router.post("/", formValidator.validate, async function(req, res, next) {
+router.post("/", formValidator.validate, async function (req, res, next) {
+  console.log(req.body);
   if (res.locals.hasErrors) {
     res.render("pages/index", {
       email: req.body.email,
@@ -37,7 +38,7 @@ router.post("/", formValidator.validate, async function(req, res, next) {
       emailMatchError:
         res.locals.emailMatchError != undefined
           ? res.locals.emailMatchError
-          : false
+          : false,
     });
   } else {
     const user = {
@@ -48,7 +49,7 @@ router.post("/", formValidator.validate, async function(req, res, next) {
         req.body.password.includes("p=") &&
         req.body.password.includes("$argon2i$")
           ? req.body.password
-          : argon2.hash(req.body.password)
+          : await argon2.hash(req.body.password),
     };
     console.log(store.paths);
     const success = await userRepository.editUser(user, store.paths);

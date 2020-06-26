@@ -1,7 +1,7 @@
 var db = require("../models/index");
 var User = db.sequelize.import("../models/user.js");
 var Directory = db.sequelize.import("../models/directory.js");
-var UserDirectory = db.sequelize.import("../models/userdirectory.js")
+var UserDirectory = db.sequelize.import("../models/userdirectory.js");
 var directoryRepository = require("./directoryRepository");
 var userDirectoryRepository = require("./userDirectoryRepository");
 
@@ -10,23 +10,23 @@ module.exports = {
     return new Promise((res, rej) => {
       const allDirs = directoryRepository.addDirectories(directories);
       Promise.all(allDirs)
-        .then(async dirs => {
+        .then(async (dirs) => {
           var tempDirs = [];
-          dirs.map(val => {
+          dirs.map((val) => {
             tempDirs.push(val[0].get({ plain: true }));
           });
           const user = await User.create(usr);
-          tempDirs.forEach(dir => {
+          tempDirs.forEach((dir) => {
             userDirectoryRepository.addUserDirectory(
               user.get({ plain: true }).id,
               dir.id,
-              directories.find(d => d.name === dir.path).read,
-              directories.find(d => d.name === dir.path).write
+              directories.find((d) => d.name === dir.path).read,
+              directories.find((d) => d.name === dir.path).write
             );
           });
           res(true);
         })
-        .catch(err => rej(err));
+        .catch((err) => rej(err));
     });
   },
   getAllUsers: () => {
@@ -37,42 +37,42 @@ module.exports = {
             model: Directory,
             nested: true,
             attributes: ["id", "path"],
-            through: { attributes: [] }
-          }
-        ]
-      }).then(users => {
-        const nodeData = users.map(user => user.get({ plain: true }));
+            through: { attributes: [] },
+          },
+        ],
+      }).then((users) => {
+        const nodeData = users.map((user) => user.get({ plain: true }));
         res(nodeData);
       });
     });
   },
-  deleteUser: userId => {
+  deleteUser: (userId) => {
     return new Promise(async (res, rej) => {
       User.destroy({
         where: {
-          id: userId
-        }
+          id: userId,
+        },
       });
 
       const success = await userDirectoryRepository.deleteUserDirectory(userId);
       res(success);
     });
   },
-  findUser: userId => {
+  findUser: (userId) => {
     return new Promise((res, rej) => {
       User.findOne({
         where: {
-          id: userId
+          id: userId,
         },
         include: [
           {
             model: Directory,
             nested: true,
             attributes: ["id", "path"],
-            through: { attributes: ['read', 'write'] }
-          }
-        ]
-      }).then(user => {
+            through: { attributes: ["read", "write"] },
+          },
+        ],
+      }).then((user) => {
         res(user);
       });
     });
@@ -81,28 +81,29 @@ module.exports = {
     return new Promise(async (res, rej) => {
       const success = await userDirectoryRepository.deleteUserDirectory(usr.id);
       const allDirs = directoryRepository.addDirectories(directories);
-      Promise.all(allDirs).then(async dirs => {
+      Promise.all(allDirs).then(async (dirs) => {
         var tempDirs = [];
-        dirs.map(val => {
+        dirs.map((val) => {
           tempDirs.push(val[0].get({ plain: true }));
         });
         const user = await module.exports.findUser(usr.id);
+        console.log(usr);
         user.update({
           email: usr.email,
           password: usr.password,
-          name: usr.name
+          name: usr.name,
         });
-        tempDirs.forEach(dir => {
+        tempDirs.forEach((dir) => {
           console.log(dir.id);
           userDirectoryRepository.addUserDirectory(
             user.get({ plain: true }).id,
             dir.id,
-            directories.find(d => d.name === dir.path).read,
-            directories.find(d => d.name === dir.path).write
+            directories.find((d) => d.name === dir.path).read,
+            directories.find((d) => d.name === dir.path).write
           );
         });
         res(true);
       });
     });
-  }
+  },
 };
